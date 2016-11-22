@@ -6,6 +6,7 @@ public enum Constant {
 	public int valeur;
 	Constant(int x)
 	{
+		
 		valeur =x;
 	}
 	
