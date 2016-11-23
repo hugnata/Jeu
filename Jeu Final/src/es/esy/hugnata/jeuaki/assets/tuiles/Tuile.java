@@ -16,6 +16,7 @@ import javax.swing.event.EventListenerList;
 
 import es.esy.hugnata.jeuaki.JeuAki;
 import es.esy.hugnata.jeuaki.Entity.Entity;
+import es.esy.hugnata.jeuaki.Entity.Projectile;
 import es.esy.hugnata.jeuaki.editeur.TuileConstructor;
 import es.esy.hugnata.jeuaki.listeners.EntityColisionListener;
 
@@ -37,6 +38,10 @@ public class Tuile implements EntityColisionListener {
 	 * 
 	 */
 	private List<Entity> entities;
+	/**Les projectiles présentes dans la tuile
+	 * 
+	 */
+	private List<Projectile> projectiles;
 	/**Le listener de collision d'entitée
 	 * 
 	 */
@@ -52,6 +57,7 @@ public class Tuile implements EntityColisionListener {
 			img =ImageIO.read(tuileconstructor.visible);
 			bimg =ImageIO.read(tuileconstructor.hitbox);
 			entities = new ArrayList<Entity>();
+			projectiles = new ArrayList<Projectile>();
 			} catch (IOException e) {
 				
 				e.printStackTrace();
@@ -124,10 +130,33 @@ public class Tuile implements EntityColisionListener {
 		this.entities.add(entity);
 		
 	}
+	/**Permet de retirer une {@link Entity} de la Tuile
+	 * 
+	 * @param entity Entitée à virer
+	 */
 	public void RemoveEntity(Entity entity)
 	{
 		removeEntityListener(this);
 		this.entities.remove(entity);
+	}
+	/***Permet d'ajouter une {@link Projectile} à la tuile
+	 * 
+	 * @param Projectile Entitée à ajouter
+	 */
+	public void addProjectile(Projectile Projectile)
+	{	
+		addEntityListener(this);
+		this.entities.add(Projectile);
+		
+	}
+	/**Permet de retirer une {@link Projectile} de la Tuile
+	 * 
+	 * @param Projectile Entitée à virer
+	 */
+	public void RemoveProjectile(Projectile Projectile)
+	{
+		removeEntityListener(this);
+		this.entities.remove(Projectile);
 	}
 	public boolean collision(int x,int y)
 	{

@@ -72,8 +72,8 @@ public class JeuAki extends Canvas implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		map.AddEntity(perso,Constant.DEPARTX.valeur,Constant.DEPARTY.valeur);
-		map.AddEntity(monstre,Constant.DEPARTX.valeur,Constant.DEPARTY.valeur);
+		map.addEntity(perso,Constant.DEPARTX.valeur,Constant.DEPARTY.valeur);
+		map.addEntity(monstre,Constant.DEPARTX.valeur,Constant.DEPARTY.valeur);
 		
 		addKeyListener(new KeyInput());
 	}

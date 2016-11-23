@@ -60,7 +60,7 @@ public class SpriteSheet {
 	 * @param delay Le delai entre chaque sprite
 	 * @return une nouvelle animation
 	 */
-	public Animation getAnimation(int x,int y,int nb,int delay)
+	public Animation getAnimation(String name,int x,int y,int nb,int delay)
 	{
 		Image[] sprite = new Image[nb];
 		for(int i=0;i<nb;i++)
@@ -68,7 +68,7 @@ public class SpriteSheet {
 			Image imgd = img.getSubimage(x+i*this.width, y, this.width, this.height);
 			sprite[i] = imgd;
 		}
-		 return new Animation(sprite,delay);
+		 return new Animation(name,sprite,delay);
 	}
 	
 

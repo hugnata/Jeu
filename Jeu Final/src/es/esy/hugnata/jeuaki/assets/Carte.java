@@ -14,10 +14,12 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+
 import es.esy.hugnata.jeuaki.Constant;
 import es.esy.hugnata.jeuaki.JeuAki;
 import es.esy.hugnata.jeuaki.Entity.Entity;
 import es.esy.hugnata.jeuaki.Entity.Player;
+import es.esy.hugnata.jeuaki.Entity.Projectile;
 import es.esy.hugnata.jeuaki.assets.tuiles.Tuile;
 import es.esy.hugnata.jeuaki.editeur.TuileConstructor;
 
@@ -46,6 +48,7 @@ public class Carte {
 	protected Tuile activetuile;
 
 	//private Entity[] entities;
+	/**
 
 	/**Crée une nouvelle carte en fonction des éléments présents dans le dossier
 	 * 
@@ -54,8 +57,6 @@ public class Carte {
 	 * 
 	 * 
 	 */
-	
-	 
 	public Carte(String nom) throws IOException
 	{
 		tuiles = new Tuile[60][60];
@@ -263,14 +264,15 @@ public class Carte {
 		
 		return eligible;
 	}
-	/**
-	 * @param couloirs
-	 * @param activetuile
-	 * @param fin
-	 * @param taille
-	 * @param nbcouloirs
+	/**Permet de trouver un parcours de la tuileactive à la tuile fin en passant par au minimun taille couloirs et stoke le labyrinthe dans le tableau {@link #tuiles}
+	 * 
+	 * @param couloirs Les differents couloirs 
+	 * @param activetuile La tuile de départ
+	 * @param fin La tuile de fin 
+	 * @param taille La taille minimale du donjon
+	 * @param nbcouloirs le nombre de couloirs dans le tableau couloirs
 	 */
-	public void TrouverParcours(TuileConstructor[] couloirs,TuileConstructor activetuile,TuileConstructor fin,int taille,int nbcouloirs)
+	private void TrouverParcours(TuileConstructor[] couloirs,TuileConstructor activetuile,TuileConstructor fin,int taille,int nbcouloirs)
 	{
 		Random r = new Random();
 		boolean fini = false;
@@ -485,14 +487,24 @@ public class Carte {
 		System.out.println("Changement de tuile x: "+ JeuAki.perso.chunkx + "   y:"+ JeuAki.perso.chunky);
 	}
 	/**Ajoute une entitée à la tuile désignée par les coords X et Y du chunk de l'entitée
-	 * 
+
 	 * @param entity
-	 * 
-	 * @see MovingEntity 
-	 * 	 */
-	public void AddEntity(Entity entity,int chunkx,int chunky)
+	 * @param chunkx
+	 * @param chunky
+	 */
+	public void addEntity(Entity entity,int chunkx,int chunky)
 	{
 		tuiles[chunkx][chunky].addEntity(entity);
+	}
+	/**Ajoute un projectile à la tuile désignée par les coords X et Y du chunk de l'entitée
+	 * 
+	 * @param Projectile
+	 * @param chunkx
+	 * @param chunky
+	 */
+	public void addProjectile(Projectile Projectile,int chunkx,int chunky)
+	{
+		tuiles[chunkx][chunky].addProjectile(Projectile);
 	}
 	/**
 	 * @param direction
@@ -573,4 +585,8 @@ public class Carte {
 		}
 		return false;
 	}
+	
+	
+
+	
 }
