@@ -506,6 +506,15 @@ public class Carte {
 	{
 		tuiles[chunkx][chunky].addProjectile(Projectile);
 	}
+	
+	/**Ajoute un projectile à la tuile active
+	 * 
+	 * @param projectile
+	 */
+	public void addProjectile(Projectile projectile) {
+
+		activetuile.addProjectile(projectile);
+	}
 	/**
 	 * @param direction
 	 * @param entity
@@ -585,6 +594,7 @@ public class Carte {
 		}
 		return false;
 	}
+
 	
 	
 
