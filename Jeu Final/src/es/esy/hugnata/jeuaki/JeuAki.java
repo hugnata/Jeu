@@ -23,7 +23,9 @@ import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardEndHandler;
 
 
 
+
 import es.esy.hugnata.jeuaki.Entity.Entity;
+import es.esy.hugnata.jeuaki.Entity.Monstre;
 import es.esy.hugnata.jeuaki.Entity.Player;
 import es.esy.hugnata.jeuaki.assets.Carte;
 import es.esy.hugnata.jeuaki.assets.tuiles.Tuile;
@@ -44,7 +46,7 @@ public class JeuAki extends Canvas implements Runnable{
 	public static Player perso;
 	public static Entity monstre;
 	private boolean running = false;
-	public static final String version = "0.9 Version Tuiles auto - non Testé";
+	public static final String version = "0.11 Donjon et déplacements fonctionnels";
 	
 	public static Carte map;
 	public static Tuile tuile;
@@ -67,7 +69,7 @@ public class JeuAki extends Canvas implements Runnable{
 			System.exit(0);
 		} 
 		try {
-			monstre = new Entity("test",new File("ressources/test/4.png"),512,512,50,50);
+			monstre = new Monstre("nain",new File("ressources/test/4.png"),512,512,50,50,100,1);
 		} catch (SpriteSheetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,23 +110,43 @@ public class JeuAki extends Canvas implements Runnable{
 
 		if(KeyInput.isDown(KeyEvent.VK_Z))
 		{ 
-			if(!map.Collision(1,perso))perso.setCoordy(perso.getCoordy() - perso.speed);
-				;
+			if(!map.Collision(1,perso))
+				{
+				perso.setCoordy(perso.getCoordy() - perso.speed);
+				perso.getAnimator().changerAnim("haut");;
+				perso.setDirection(1);
+				}
 			
 		}
 		if(KeyInput.isDown(KeyEvent.VK_S))
 		{ 
-			if(!map.Collision(2,perso))perso.setCoordy(perso.getCoordy() + perso.speed);
-				;
+			if(!map.Collision(2,perso)){
+				perso.setCoordy(perso.getCoordy() + perso.speed);
+			
+			perso.getAnimator().changerAnim("bas");
+			perso.setDirection(2);
+			}
 		}
 		if(KeyInput.isDown(KeyEvent.VK_Q))
 		{ 
-			if(!map.Collision(3,perso))perso.setCoordx(perso.getCoordx() - perso.speed);
-				
+			if(!map.Collision(3,perso)){perso.setCoordx(perso.getCoordx() - perso.speed);
+			perso.getAnimator().changerAnim("gauche");
+			perso.setDirection(3);
+			}
 		}
 		if(KeyInput.isDown(KeyEvent.VK_D))
 		{ 
-			if(!map.Collision(4,perso))perso.setCoordx(perso.getCoordx() + perso.speed);
+			if(!map.Collision(4,perso))
+				{
+				perso.setCoordx(perso.getCoordx() + perso.speed);
+				perso.getAnimator().changerAnim("droite");
+				perso.setDirection(4);
+				}
+			
+		}
+		if(KeyInput.isDown(KeyEvent.VK_SPACE))
+		{
+			perso.getAnimator().changerAnim("tir");
 		}
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
@@ -190,7 +212,7 @@ public class JeuAki extends Canvas implements Runnable{
 
 	public static void main(String[] args)
 	{
-		System.out.println("Le jeu se lance. Version: "+ version);
+		System.out.println("Version: "+ version);
 		JeuAki jeu = new JeuAki();
 		
 		JFrame frame = new JFrame();

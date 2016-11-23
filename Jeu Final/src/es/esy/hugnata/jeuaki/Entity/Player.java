@@ -77,7 +77,6 @@ public int direction;
 				Projectile pro = new Projectile(this,new File("ressources/divers/Balle.png"),16,16,64,64,1,200,20,this.direction);
 				JeuAki.map.addProjectile(pro,chunkx,chunky);
 			} catch (SpriteSheetException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

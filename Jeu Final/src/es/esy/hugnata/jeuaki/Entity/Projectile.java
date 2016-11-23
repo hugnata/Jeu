@@ -23,6 +23,7 @@ public class Projectile extends Entity {
 	
 	public Projectile(Entity lanceur, File spritesheet, int animheight, int animwidth, int height, int width,int nbanim,int delay,int degat,int direction) throws SpriteSheetException {
 		super(lanceur.getName()+"_Projectile", spritesheet, animheight, animwidth, height, width);
+		System.out.println("Une b");
 	try{
 		Player p =(Player)lanceur;
 		gentil=true;
@@ -66,7 +67,7 @@ public class Projectile extends Entity {
 	
 	}	
 	public void OnCollision(Entity entity2) {
-		
+		System.out.println("Une balle a touché "+ entity2.name);
 			if(touche ==false)
 			{
 				if(gentil)
@@ -103,7 +104,6 @@ public class Projectile extends Entity {
 			try {
 				animator.ChangeSpriteSheet(new SpriteSheet(new File("ressources/effets/explosion.png"),128,128));
 			} catch (IndexOutOfBoundsException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			animator.addAnim("dest", 0,0, 10,4);
@@ -117,6 +117,7 @@ public class Projectile extends Entity {
 		if(anim.getName().equalsIgnoreCase("dest"))
 		{
 			System.out.println("Adieu !");
+			animator.changerAnim("rien");
 			this.Visible = false;
 		}
 		

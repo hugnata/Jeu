@@ -39,7 +39,7 @@ public class SpriteSheet {
 	 */
 	public SpriteSheet(File img, int width,int height) throws  IOException,IndexOutOfBoundsException
 	{
-		System.out.println("Création d'un nouveau SpriteSheet");
+
 	
 		this.img = ImageIO.read(img);
 		if(!(this.img.getHeight()<height)&&!(this.img.getWidth()<width))

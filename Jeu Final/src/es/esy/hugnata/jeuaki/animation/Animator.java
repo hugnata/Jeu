@@ -45,6 +45,8 @@ public class Animator implements AnimationListener{
 	}
 	public Image play()
 	{
+	if(choisi!="rien")	
+	{
 		if(animations.containsKey(choisi))
 		{
 			return animations.get(choisi).play();
@@ -52,6 +54,8 @@ public class Animator implements AnimationListener{
 		{
 			return animations.get("defaut").play();
 		}
+	}else return null;
+		
 
 	}
 	public void changerAnim(String anim)

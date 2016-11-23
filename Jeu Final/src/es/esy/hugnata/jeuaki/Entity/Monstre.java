@@ -8,6 +8,7 @@ import javax.swing.event.EventListenerList;
 
 
 
+
 import es.esy.hugnata.jeuaki.JeuAki;
 import es.esy.hugnata.jeuaki.animation.Animation;
 import es.esy.hugnata.jeuaki.exceptions.SpriteSheetException;
@@ -27,7 +28,7 @@ public class Monstre extends Entity{
 	/**
 	 * Sa vitesse
 	 */
-	public final int speed =2;
+	public final int speed =25;
 	
 	EventListenerList listeners = new EventListenerList();
 	/**Le constructeur du monstre , identique à celui de l'{@link Entity} + la santée du monstre
@@ -43,7 +44,9 @@ public class Monstre extends Entity{
 	 */
 	public Monstre(String nom, File spritesheet, int animwidth, int animheight,
 			int width, int height, int health,int speed) throws SpriteSheetException {
+		
 		super(nom, spritesheet, animwidth, animheight, width, height);
+		System.out.println("Création d'un nouveau monstre: "+nom);
 		this.health = health;
 		this.healthdepart = health;
 	}
@@ -52,12 +55,13 @@ public class Monstre extends Entity{
 		health -=vie;
 		if(health<=0)
 		{ 
-			/*this.Visible = false;
-			
+			this.Visible = false;
+			animator.changerAnim("rien");
 			for(MonstreEventListener listener: listeners.getListeners(MonstreEventListener.class))
 			{
 				listener.OnMort(this);
-			}*/
+				
+			}
 		}
 	}
 	public void DrawEntity(Graphics g,int x,int y)
@@ -67,10 +71,10 @@ public class Monstre extends Entity{
 		g.drawRect(getCoordx()+x, getCoordy()+y-30, 100, 20);
 		g.setColor(Color.red);
 		g.fillRect(getCoordx()+x-1, getCoordy()-29+y, (int) Math.floor((100*health)/healthdepart),18);
-	g.drawImage(animator.play(), getCoordx()+x, getCoordy()+y,width,height, null);
-	//TODO REMOVE HITBOX
-	g.setColor(Color.RED);
-	g.drawRect(getCoordx()+x, getCoordy()+y, width, height);
+		g.drawImage(animator.play(), getCoordx()+x, getCoordy()+y,width,height, null);
+		//TODO REMOVE HITBOX
+		g.setColor(Color.RED);
+		g.drawRect(getCoordx()+x, getCoordy()+y, width, height);
 	
 		
 	}

@@ -172,7 +172,7 @@ public class Entity implements AnimationListener{
 		this.width = width;
 	}
 	public void OnCollision(Entity entity2) {
-		System.out.println("Colision entre "+ this.getName() + " et " + entity2.getName());
+		//System.out.println("Colision entre "+ this.getName() + " et " + entity2.getName());
 	}
 	@Override
 	public void OnFinAnimation(Animation anim) {

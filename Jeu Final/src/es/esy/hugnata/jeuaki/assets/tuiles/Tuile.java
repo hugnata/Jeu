@@ -96,10 +96,11 @@ public class Tuile implements EntityColisionListener {
 	private void checkEntityColision() {
 		
 		ListIterator<Entity> li = entities.listIterator();
-		ListIterator<Entity> ll = entities.listIterator();
-		while(li.hasNext())
+		
+ 		while(li.hasNext())
 		{
 			Entity entity =	li.next();
+			ListIterator<Entity> ll = entities.listIterator();
 			while(ll.hasNext())
 				{
 				
@@ -141,7 +142,7 @@ public class Tuile implements EntityColisionListener {
 	}
 	/***Permet d'ajouter une {@link Projectile} à la tuile
 	 * 
-	 * @param Projectile Entitée à ajouter
+	 * @param Projectile Projectile à ajouter
 	 */
 	public void addProjectile(Projectile Projectile)
 	{	
@@ -174,6 +175,8 @@ public class Tuile implements EntityColisionListener {
 	@Override
 	public void OnCollision(Entity entity, Entity entity2) {
 		//System.out.println("bonjour");
+		entity2.OnCollision(entity);
+		entity.OnCollision(entity2);
 		
 	}
 

@@ -61,9 +61,13 @@ public class Carte {
 	 */
 	public Carte(String nom) throws IOException
 	{
+		System.out.print("Chargement de la carte en cours...");
+		System.out.print("...");
 		tuiles = new Tuile[60][60];
 		Properties prop = new Properties();
+		System.out.println("...");
 		this.fichier = new File("ressources/cartes/"+nom);
+		
 		InputStream input = new FileInputStream((fichier + "/"+nom+".carte"));
 		if(input==null){
 			System.err.println("Sorry, unable to find " + nom+".carte");
@@ -194,7 +198,7 @@ public class Carte {
 		}
 
 		System.out.println(nbcouloirs + " couloirs chargés");
-		TrouverParcours(totalutile,entree,fin,4,nbcouloirs);
+		TrouverParcours(totalutile,entree,fin,10,nbcouloirs);
 		return true;
 	}
 	/**Vérifie si 2 tuiles peuvent s'emboiter, à la manière d'un puzzle 
@@ -282,7 +286,11 @@ public class Carte {
 		int x=Constant.DEPARTX.valeur,y=Constant.DEPARTY.valeur;
 		while(!fini)
 		{
-			
+			System.out.println("n°"+i+" Nom="+activetuile.nom+" Link=" +activetuile.link
+					
+					
+					
+					);
 
 			/****Chercheur de correspondances */
 			TuileConstructor[] eligibles = new TuileConstructor[nbcouloirs*4];
@@ -313,12 +321,7 @@ public class Carte {
 				}
 
 			}
-			System.out.println("Salle actuelle: "+activetuile.nom + " Ouvertures: B:" + activetuile.isB()+" H:" + activetuile.isH() 
-					+" G:" + activetuile.isG() 
-					+" D:" + activetuile.isD() 
-					+"Liens effectué: " + activetuile.link
-					);
-			
+		
 			int elu = r.nextInt(nbeligible);
 			
 			if(eligibles[elu].getLink() =='b')
@@ -349,12 +352,12 @@ public class Carte {
 				tuiles[x][y] = new Tuile(eligibles[elu]);
 				activetuile = eligibles[elu];
 			}
-			System.out.println("Nouvelle Salle: "+activetuile.nom + " Ouvertures: B:" + activetuile.isB()+" H:" + activetuile.isH() 
-					+" G:" + activetuile.isG() 
-					+" D:" + activetuile.isD() 
-					+"Liens effectué: " + activetuile.link
+			
+System.out.println("n°"+i+" Nom="+activetuile.nom+" Link=" +activetuile.link
+					
+					
+					
 					);
-			System.out.println("");
 			i++;
 
 			if(i>taille)
@@ -369,43 +372,44 @@ public class Carte {
 				{
 					
 					 
-					 TuileConstructor choisie = tuiledefin[r.nextInt(tailletableau)]  ;
+					 TuileConstructor choisie = tuiledefin[r.nextInt(tailletableau)];
 					 if(choisie.getLink() =='b')
 						{
-							y++;
-							choisie.setB(false);;
-							tuiles[x][y] = new Tuile(choisie);
+							y--;
+							tuiles[x][y] = new Tuile(fin);
 						
 						}
 						if(choisie.getLink() =='h')
 						{
-							y--;
-							choisie.setH(false);;
-							tuiles[x][y] = new Tuile(choisie);
+							y++;
+							tuiles[x][y] = new Tuile(fin);
 						
 						}
 						if(choisie.getLink() =='d')
 						{
-							x++;
-							choisie.setD(false);;
-							tuiles[x][y] = new Tuile(choisie);
+							x--;
+							tuiles[x][y] = new Tuile(fin);
 						
 						}
 						if(choisie.getLink() =='g')
 						{
-							x--;
-							choisie.setG(false);;
-							tuiles[x][y] = new Tuile(choisie);
+							x++;
+							tuiles[x][y] = new Tuile(fin);
 							
 						}
-						fini = true;
+						fini = true;System.out.println("n°"+i+" Nom="+choisie.nom+" Link=" +choisie.link);
 					}
 				
+						
+						
+						
+					
 				
 				}
 			}
 
 			/****FIN Chercheur de correspondances */
+		System.out.println("Donjon généré: Génération des monstres");
 		}
 	
 
