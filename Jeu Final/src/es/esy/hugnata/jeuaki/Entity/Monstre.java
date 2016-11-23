@@ -24,7 +24,10 @@ public class Monstre extends Entity{
 	 * Sa vie de départ, qui ne peut pas être modifiée
 	 */
 	final int healthdepart;
-
+	/**
+	 * Sa vitesse
+	 */
+	public final int speed =2;
 	
 	EventListenerList listeners = new EventListenerList();
 	/**Le constructeur du monstre , identique à celui de l'{@link Entity} + la santée du monstre
@@ -39,7 +42,7 @@ public class Monstre extends Entity{
 	 * @throws SpriteSheetException
 	 */
 	public Monstre(String nom, File spritesheet, int animwidth, int animheight,
-			int width, int height, int health) throws SpriteSheetException {
+			int width, int height, int health,int speed) throws SpriteSheetException {
 		super(nom, spritesheet, animwidth, animheight, width, height);
 		this.health = health;
 		this.healthdepart = health;
@@ -65,7 +68,9 @@ public class Monstre extends Entity{
 		g.setColor(Color.red);
 		g.fillRect(getCoordx()+x-1, getCoordy()-29+y, (int) Math.floor((100*health)/healthdepart),18);
 	g.drawImage(animator.play(), getCoordx()+x, getCoordy()+y,width,height, null);
-		
+	//TODO REMOVE HITBOX
+	g.setColor(Color.RED);
+	g.drawRect(getCoordx()+x, getCoordy()+y, width, height);
 	
 		
 	}

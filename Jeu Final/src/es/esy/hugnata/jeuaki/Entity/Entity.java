@@ -105,6 +105,8 @@ public class Entity implements AnimationListener{
 	public void DrawEntity(Graphics g,int x,int y)
 	{
 		g.drawImage(animator.play(), getCoordx()+x, getCoordy()+y,width,height, null);
+		///Hitbox);
+		g.drawRect(getCoordx()+x, getCoordy()+y, width, height);
 	
 	}
 	/**

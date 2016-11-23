@@ -160,7 +160,12 @@ public class Tuile implements EntityColisionListener {
 	}
 	public boolean collision(int x,int y)
 	{
-		if((((bimg.getRGB(x,y))>>24)&255)==0)
+			if(x<0)x=0;
+			if(y<0)y=0;
+			if(x>=640)x=639;
+			if(y>=640)y=639;
+			
+			if((((bimg.getRGB(x,y))>>24)&255)==0)
 			{
 			return true;
 			}

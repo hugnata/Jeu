@@ -15,9 +15,11 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 
 
+
 import es.esy.hugnata.jeuaki.Constant;
 import es.esy.hugnata.jeuaki.JeuAki;
 import es.esy.hugnata.jeuaki.Entity.Entity;
+import es.esy.hugnata.jeuaki.Entity.Monstre;
 import es.esy.hugnata.jeuaki.Entity.Player;
 import es.esy.hugnata.jeuaki.Entity.Projectile;
 import es.esy.hugnata.jeuaki.assets.tuiles.Tuile;
@@ -524,9 +526,10 @@ public class Carte {
 	{
 		switch(direction)
 		{
+		//Si on monte
 		case 1:
 		{
-			if(entity.getCoordy()+entity.getHeight()<=0)
+			if(entity.getCoordy()+entity.getHeight()-entity.speed<=0)
 			{
 				entity.chunky--;
 				activetuile.RemoveEntity(entity);
@@ -537,12 +540,16 @@ public class Carte {
 				return false;
 			}else
 			{
-				return activetuile.collision(entity.getCoordx(), entity.getCoordy() + entity.getHeight());
+				
+				return ((activetuile.collision(entity.getCoordx(), entity.getCoordy() + entity.getHeight()-entity.speed))||(activetuile.collision(entity.getCoordx()+entity.getWidth(), entity.getCoordy() + entity.getHeight()-entity.speed)));
+					
 			}
+			
 		}
+		//Si on descend
 		case 2:
 		{
-			if(entity.getCoordy()+entity.getHeight()+1>=640)
+			if(entity.getCoordy()+entity.getHeight()+1+entity.speed>=640)
 			{
 				entity.chunky++;
 				activetuile.RemoveEntity(entity);
@@ -553,12 +560,13 @@ public class Carte {
 				return false;
 			}else
 			{
-				return activetuile.collision(entity.getCoordx(), entity.getCoordy()+1+entity.getHeight());
+				return (activetuile.collision(entity.getCoordx(), entity.getCoordy()+entity.getHeight()+1+entity.speed)||activetuile.collision(entity.getCoordx()+entity.getWidth(), entity.getCoordy()+1+entity.getHeight()+entity.speed));
 			}
 		}
+		//Si on va à gauche
 		case 3:
 		{
-			if(entity.getCoordx()<=0)
+			if(entity.getCoordx()-entity.speed<=0)
 			{
 				entity.chunkx--;
 				activetuile.RemoveEntity(entity);
@@ -569,23 +577,23 @@ public class Carte {
 				return false;
 			}else
 			{
-				return activetuile.collision(entity.getCoordx(), entity.getCoordy()+ entity.getHeight());
+				return activetuile.collision(entity.getCoordx()-entity.speed, entity.getCoordy()+ entity.getHeight());
 			}
 		}
-		//se déplace vers le haut
+		//Si on va vers la droite
 		case 4:
 		{
-			if(entity.getCoordx()+1>=640)
+			if(entity.getCoordx()+entity.speed>=640)
 			{
 				entity.chunkx++;
 				activetuile.RemoveEntity(entity);
-				activetuile = tuiles[entity.chunkx][1];
+				activetuile = tuiles[entity.chunkx][entity.chunky];
 				activetuile.addEntity(entity);
 				ChangementTuile();
-				entity.setCoordx(0);
+				entity.setCoordx(entity.speed);
 			}else
 			{
-				return activetuile.collision(entity.getCoordx()+1, entity.getCoordy()+ entity.getHeight());
+				return activetuile.collision(entity.getCoordx()+entity.getWidth()+entity.speed, entity.getCoordy()+ entity.getHeight());
 			}
 		}
 

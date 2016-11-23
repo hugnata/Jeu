@@ -31,7 +31,7 @@ public int direction;
 	 */
 	public Player(File spritesheet,int animheight,int animwidth,int height,int width) throws SpriteSheetException
 	{
-		super("joueur",spritesheet,animwidth,animheight, height,width,200);
+		super("joueur",spritesheet,animwidth,animheight, height,width,200,2);
 		
 	}
 	/***Le constructeur du player à partir des valeurs par defaut
@@ -42,7 +42,7 @@ public int direction;
 		public Player()  throws SpriteSheetException 
 		{
 			
-			super("joueur",new File("ressources/Spritesheets/PlayerSpritesheet.png"),32,50,100,64,200);
+			super("joueur",new File("ressources/Spritesheets/PlayerSpritesheet.png"),32,50,100,64,200,2);
 			
 			animator.addAnim("bas",0, 0, 4, 20);
 			animator.addAnim("haut",0, 50, 4, 20);
@@ -63,7 +63,13 @@ public int direction;
 			g.setColor(Color.red);
 			g.fillRect(319, 281, (int) Math.floor((100*health)/healthdepart),18);
 			g.drawImage(animator.play(), 320, 320,width,height, null);
-		
+			//TODO REMOVE HITBOX
+			g.setColor(Color.RED);
+			g.drawRect(getCoordx()+x, getCoordy()+y, width, height);
+			//TODO REMOVE COORDS
+			g.setColor(Color.GREEN);
+			g.drawString(Integer.toString(getCoordx()), getCoordx()+x+4, getCoordy()+y+2);
+			g.drawString(Integer.toString(getCoordy()), getCoordx()+x+35, getCoordy()+y+2);
 		}
 		public void Tirer()
 		{

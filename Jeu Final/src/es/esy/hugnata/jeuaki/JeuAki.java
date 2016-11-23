@@ -108,23 +108,23 @@ public class JeuAki extends Canvas implements Runnable{
 
 		if(KeyInput.isDown(KeyEvent.VK_Z))
 		{ 
-			if(!map.Collision(1,perso))perso.setCoordy(perso.getCoordy() - 5);
+			if(!map.Collision(1,perso))perso.setCoordy(perso.getCoordy() - perso.speed);
 				;
 			
 		}
 		if(KeyInput.isDown(KeyEvent.VK_S))
 		{ 
-			if(!map.Collision(2,perso))perso.setCoordy(perso.getCoordy() + 5);
+			if(!map.Collision(2,perso))perso.setCoordy(perso.getCoordy() + perso.speed);
 				;
 		}
 		if(KeyInput.isDown(KeyEvent.VK_Q))
 		{ 
-			if(!map.Collision(3,perso))perso.setCoordx(perso.getCoordx() - 5);
+			if(!map.Collision(3,perso))perso.setCoordx(perso.getCoordx() - perso.speed);
 				
 		}
 		if(KeyInput.isDown(KeyEvent.VK_D))
 		{ 
-			if(!map.Collision(4,perso))perso.setCoordx(perso.getCoordx() + 5);
+			if(!map.Collision(4,perso))perso.setCoordx(perso.getCoordx() + perso.speed);
 		}
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
