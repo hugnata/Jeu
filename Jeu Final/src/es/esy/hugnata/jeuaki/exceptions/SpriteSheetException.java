@@ -3,25 +3,23 @@ package es.esy.hugnata.jeuaki.exceptions;
 import es.esy.hugnata.jeuaki.Entity.Entity;
 
 
+public class SpriteSheetException extends Exception {
+    public SpriteSheetException() {
+        super("Un problÃ¨me est apparu lors de la crÃ©ation de l'animator");
+    }
 
-public class SpriteSheetException extends Exception{
-	public SpriteSheetException()
-	{
-		super("Un problème est apparu lors de la création de l'animator");
-	}
-	public SpriteSheetException(String message)
-	{
-		super("Un problème est apparu lors de la création de l'animator\n    " + message);
-	}
-	public SpriteSheetException(Entity entity)
-	{
-		super("Un problème est apparu lors de la création de l'animator de l'entitée "+entity.getName() );
-	}
-	public SpriteSheetException(es.esy.hugnata.jeuaki.Entity.Entity entity,String message)
-	{
-		super("Un problème est apparu lors de la création de l'animator de l'entitée "+entity.getName()+"\n    " + message);
+    public SpriteSheetException(String message) {
+        super("Un problÃ¨me est apparu lors de la crÃ©ation de l'animator\n    " + message);
+    }
 
-	}
-		
-	
+    public SpriteSheetException(Entity entity) {
+        super("Un problÃ¨me est apparu lors de la crÃ©ation de l'animator de l'entitÃ©e " + entity.getName());
+    }
+
+    public SpriteSheetException(es.esy.hugnata.jeuaki.Entity.Entity entity, String message) {
+        super("Un problÃ¨me est apparu lors de la crÃ©ation de l'animator de l'entitÃ©e " + entity.getName() + "\n    " + message);
+
+    }
+
+
 }

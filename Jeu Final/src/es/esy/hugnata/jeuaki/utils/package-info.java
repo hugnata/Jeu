@@ -1,5 +1,5 @@
-/**Sert de fouilli
- * 
+/**
+ * Sert de fouilli
  */
 
 package es.esy.hugnata.jeuaki.utils;

@@ -1,184 +1,203 @@
 package es.esy.hugnata.jeuaki.Entity;
 
-import java.awt.Graphics;
-import java.io.File;
-import java.io.IOException;
-
 import es.esy.hugnata.jeuaki.animation.Animation;
 import es.esy.hugnata.jeuaki.animation.Animator;
 import es.esy.hugnata.jeuaki.animation.SpriteSheet;
 import es.esy.hugnata.jeuaki.exceptions.SpriteSheetException;
 import es.esy.hugnata.jeuaki.listeners.AnimationListener;
-	/**Classe représentant une entitée
-	 * 
-	 * @author Hugnata
-	 *
-	 */
 
-public class Entity implements AnimationListener{
-	/**Le nom de l'entitée
-	 * 
-	 */
-	protected String name;
-	/**La coordonnée x de l'entitée, à l'interieur de sa tuile
-	 * 
-	 */
-	protected  int coordx =320;
-	/**La coordonnée y de l'entitée, à l'interieur de sa tuile
-	 * 
-	 */
-	protected  int coordy =320;
-	/**La hauteur de l'entitée
-	 * 
-	 */
-	protected  int height = 0 ;
-	/**La Largeur de l'entitée
-	 * 
-	 */
-	protected  int width = 0;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
-	/**L'animator de l'entitée 
-	 * 
-	 */
-	protected Animator animator;
-	/**
-	 * Boolean qui dit si oui ou non l'entitée est chargé par la map
-	 */
-	protected boolean Visible = true ;
-	public boolean isVisible() {
-		return Visible;
-	}
-	public void setVisible(boolean visible) {
-		Visible = visible;
-	}
-	/**Crée l'entitée à partir d'une image, de la hauteur et de la largeur
-	 * 
-	 * Une entitée est un "objet" qui va être placé sur une tuile.
-	 * 
-	 * @see MovingEntity
-	 * @see Player
-	 * @see es.esy.hugnata.jeuaki.assets.objet.Interagible
-	 * 
-	 * @param height La Largeur de l'entitée
-	 * @param width La hauteur de l'entitée
-	 * @param animator Le fichier contenant le spritesheet de l'entitée
-	 * @param animheight La hauteur des animations
-	 * @throws SpriteSheetException 
-	 * @parma animwidth La largeur des animations
-	 * 
-	 */
-	public Entity(String nom,File spritesheet,int animwidth,int animheight,int width,int height) throws SpriteSheetException
-	{
-		
-		this.name = nom;
-		this.height = height;
-		this.width = width;
-		
-		
-				try {
-					this.animator = new Animator(new SpriteSheet(spritesheet,animwidth,animheight));
-				} catch (IOException e) {
-					throw new SpriteSheetException(this,"Le spritesheet n'a pas pu être chargé");
-		}
-				catch(IndexOutOfBoundsException e1)
-				{
-					throw new SpriteSheetException(this,"la dimension  des sprite est superieure à la dimension de l'image !");
-					
-				}
-			
-				animator.SetAnimationListener(this);
-		
-		
-	}
-	/**Constructeur vide permet seulement de récuperer la methode {@link #DrawEntity} et la position du joueur*/
-	public Entity() {
-		// TODO Auto-generated constructor stub
-	}
-	/**Dessine l'entitée sur la tuile
-	 * 
-	 * Methode appelée lors du rendu de la tuile, permet de dessiner l'entitée sur la map, en fonction des coordonnées {@link #coordx x} et  {@link #coordy y}de l'entitée.
-	 * Dessine l'image donnée par l'{@link #animator Animator} de l'entitée
-	 * 
-	 * 
-	 * @param g Graphics
-	 */
-	public void DrawEntity(Graphics g,int x,int y)
-	{
-		g.drawImage(animator.play(), getCoordx()+x, getCoordy()+y,width,height, null);
-		///Hitbox);
-		g.drawRect(getCoordx()+x, getCoordy()+y, width, height);
-	
-	}
-	/**
-	 * Methode appelée avant de dessiner l'entitée
-	 */
-	public void preDraw()
-	{
-		
-	}
-	/**Renvoie la coordonée y de l'entitée
-	 * 
-	 * @return coordy
-	 */
-	public int getCoordy() {
-		return coordy;
-	}
-	/**Met à jour la coordonée y de l'entitée
-	 * 
-	 * @param coordy
-	 */
-	public void setCoordy(int coordy) {
-		this.coordy = coordy;
-	}
-	/**Renvoie la coordonée x de l'entitée
-	 * 
-	 * @return coordx
-	 */
-	public int getCoordx() {
-		return coordx;
-	}
-	/**Met à jour la coordonée x de l'entitée
-	 * 
-	 * @param coordx
-	 */
-	public void setCoordx(int coordx) {
-		this.coordx = coordx;
-	}
-	/**Renvoie le nom de l'entitée
-	 * 
-	 * @return  le nom de l'entitée
-	 */
-	public String getName() {
-		return this.name;
-	}
-	/**Renvoie l'animator de l'entitée
-	 * 
-	 * @return Animator
-	 */
-	public Animator getAnimator()
-	{
-		return this.animator;
-	}
-	public int getHeight() {
-		return height;
-	}
-	public void setHeight(int height) {
-		this.height = height;
-	}
-	public int getWidth() {
-		return width;
-	}
-	public void setWidth(int width) {
-		this.width = width;
-	}
-	public void OnCollision(Entity entity2) {
-		//System.out.println("Colision entre "+ this.getName() + " et " + entity2.getName());
-	}
-	@Override
-	public void OnFinAnimation(Animation anim) {
-		System.out.println("FinAnimationde " + this.getName());
-		
-	}
-	
-	
+/**
+ * Classe reprÃ©sentant une entitÃ©e
+ *
+ * @author Hugnata
+ */
+
+public class Entity implements AnimationListener {
+    /**
+     * Le nom de l'entitÃ©e
+     */
+    protected String name;
+    /**
+     * La coordonnÃ©e x de l'entitÃ©e, Ã  l'interieur de sa tuile
+     */
+    protected int coordx = 320;
+    /**
+     * La coordonnÃ©e y de l'entitÃ©e, Ã  l'interieur de sa tuile
+     */
+    protected int coordy = 320;
+    /**
+     * La hauteur de l'entitÃ©e
+     */
+    protected int height = 0;
+    /**
+     * La Largeur de l'entitÃ©e
+     */
+    protected int width = 0;
+
+    /**
+     * L'animator de l'entitÃ©e
+     */
+    protected Animator animator;
+    /**
+     * Boolean qui dit si oui ou non l'entitÃ©e est chargÃ© par la map
+     */
+    protected boolean Visible = true;
+
+    /**
+     * CrÃ©e l'entitÃ©e Ã  partir d'une image, de la hauteur et de la largeur
+     * <p>
+     * Une entitÃ©e est un "objet" qui va Ãªtre placÃ© sur une tuile.
+     *
+     * @param height      La Largeur de l'entitÃ©e
+     * @param width       La hauteur de l'entitÃ©e
+     * @param spritesheet Le fichier contenant le spritesheet de l'entitÃ©e
+     * @param animheight  La hauteur des animations
+     * @param animwidth   La largeur des animation
+     * @throws SpriteSheetException
+     * @see Player
+     * @see es.esy.hugnata.jeuaki.assets.objet.Interagible
+     */
+    public Entity(String nom, File spritesheet, int animwidth, int animheight, int width, int height) throws SpriteSheetException {
+
+        this.name = nom;
+        this.height = height;
+        this.width = width;
+
+
+        try {
+            this.animator = new Animator(new SpriteSheet(spritesheet, animwidth, animheight));
+        } catch (IOException e) {
+            throw new SpriteSheetException(this, "Le spritesheet n'a pas pu Ãªtre chargÃ©");
+        } catch (IndexOutOfBoundsException e1) {
+            throw new SpriteSheetException(this, "la dimension  des sprite est superieure Ã  la dimension de l'image !");
+
+        }
+
+        animator.SetAnimationListener(this);
+
+
+    }
+
+    /**
+     * Constructeur vide permet seulement de rÃ©cuperer la methode {@link #DrawEntity} et la position du joueur
+     */
+    public Entity() {
+        // TODO Auto-generated constructor stub
+    }
+
+    public boolean isVisible() {
+        return Visible;
+    }
+
+    public void setVisible(boolean visible) {
+        Visible = visible;
+    }
+
+    /**
+     * Dessine l'entitÃ©e sur la tuile
+     * <p>
+     * Methode appelÃ©e lors du rendu de la tuile, permet de dessiner l'entitÃ©e sur la map, en fonction des coordonnÃ©es {@link #coordx x} et  {@link #coordy y}de l'entitÃ©e.
+     * Dessine l'image donnÃ©e par l'{@link #animator Animator} de l'entitÃ©e
+     *
+     * @param g Graphics
+     */
+    public void DrawEntity(Graphics g, int x, int y) {
+        g.drawImage(animator.play(), getCoordx() + x, getCoordy() + y, width, height, null);
+        ///Hitbox);
+        g.drawRect(getCoordx() + x, getCoordy() + y, width, height);
+
+    }
+
+    /**
+     * Methode appelÃ©e avant de dessiner l'entitÃ©e
+     */
+    public void preDraw() {
+
+    }
+
+    /**
+     * Renvoie la coordonÃ©e y de l'entitÃ©e
+     *
+     * @return coordy
+     */
+    public int getCoordy() {
+        return coordy;
+    }
+
+    /**
+     * Met Ã  jour la coordonÃ©e y de l'entitÃ©e
+     *
+     * @param coordy
+     */
+    public void setCoordy(int coordy) {
+        this.coordy = coordy;
+    }
+
+    /**
+     * Renvoie la coordonÃ©e x de l'entitÃ©e
+     *
+     * @return coordx
+     */
+    public int getCoordx() {
+        return coordx;
+    }
+
+    /**
+     * Met Ã  jour la coordonÃ©e x de l'entitÃ©e
+     *
+     * @param coordx
+     */
+    public void setCoordx(int coordx) {
+        this.coordx = coordx;
+    }
+
+    /**
+     * Renvoie le nom de l'entitÃ©e
+     *
+     * @return le nom de l'entitÃ©e
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Renvoie l'animator de l'entitÃ©e
+     *
+     * @return Animator
+     */
+    public Animator getAnimator() {
+        return this.animator;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void OnCollision(Entity entity2) {
+        //System.out.println("Colision entre "+ this.getName() + " et " + entity2.getName());
+    }
+
+    @Override
+    public void OnFinAnimation(Animation anim) {
+        System.out.println("FinAnimationde " + this.getName());
+
+    }
+
+
 }

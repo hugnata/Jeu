@@ -2,11 +2,11 @@ package es.esy.hugnata.jeuaki.listeners;
 
 import java.util.EventListener;
 
-/**Classe qui regroupe les évents liés aux entitées hormis les collisions
- * 
- * @author Hugnata
+/**
+ * Classe qui regroupe les Ã©vents liÃ©s aux entitÃ©es hormis les collisions
  *
+ * @author Hugnata
  */
-public interface EntityEventListener extends EventListener {
+interface EntityEventListener extends EventListener {
 
 }

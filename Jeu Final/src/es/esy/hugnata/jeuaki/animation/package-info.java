@@ -1,5 +1,5 @@
-/**Contient toutes les classes relatives à l'animation
- * 
+/**
+ * Contient toutes les classes relatives Ã  l'animation
  */
 
 package es.esy.hugnata.jeuaki.animation;

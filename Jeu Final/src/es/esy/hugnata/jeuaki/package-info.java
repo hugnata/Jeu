@@ -1,6 +1,4 @@
-
-/**Contient le "launcher du jeu"
- * 
- *
+/**
+ * Contient le "launcher du jeu"
  */
 package es.esy.hugnata.jeuaki;

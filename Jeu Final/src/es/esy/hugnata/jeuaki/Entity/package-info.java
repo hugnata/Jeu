@@ -1,5 +1,5 @@
-/**Contient les classes relatives aux entitées
- * 
+/**
+ * Contient les classes relatives aux entitÃ©es
  */
 
 package es.esy.hugnata.jeuaki.Entity;

@@ -1,5 +1,4 @@
-
-/**Contient tout les évenements du jeu
- *
+/**
+ * Contient tout les Ã©venements du jeu
  */
 package es.esy.hugnata.jeuaki.event;
