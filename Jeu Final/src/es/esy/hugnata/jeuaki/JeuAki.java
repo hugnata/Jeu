@@ -94,7 +94,7 @@ public class JeuAki extends Canvas implements Runnable {
         if (running == true) //On vérifie qu'il ne soit pas lancé
         {
             //Si oui, on envoie un msg d'erreur
-            System.err.println("Vous essayez de lancer le jeu alors qu'il est déja lancé !");
+            System.err.println("Vous essayez de lancer le jeu alors qu'il est déja lancé, pauvres fous !");
             return;
         }
         //Sinon, on lance le jeu !
