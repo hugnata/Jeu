@@ -17,7 +17,7 @@ public class Monstre extends Entity {
      */
     public final int speed = 25;
     /**
-     * Sa vie de d�part, qui ne peut pas �tre modifi�e
+     * Sa vie de départ, qui ne peut pas être modifiée
      */
     final int healthdepart;
     /**
@@ -27,7 +27,7 @@ public class Monstre extends Entity {
     EventListenerList listeners = new EventListenerList();
 
     /**
-     * Le constructeur du monstre , identique � celui de l'{@link Entity} + la sant�e du monstre
+     * Le constructeur du monstre , identique à celui de l'{@link Entity} + la santée du monstre
      *
      * @param nom
      * @param spritesheet
